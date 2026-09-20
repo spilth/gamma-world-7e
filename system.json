@@ -1,0 +1,31 @@
+{
+  "id": "gamma-world-7e",
+  "title": "Gamma World 7E",
+  "description": "D&D Gamma World - 7th Edition",
+  "version": "0.0.1",
+  "compatibility": {
+    "minimum": 14,
+    "maximum": 14,
+    "verified": "14.368"
+  },
+  "authors": [
+    {
+      "name": "Brian Kelly",
+      "url": "https://spilth.org",
+      "email": "brian@spilth.org",
+      "discord": "spilth"
+    }
+  ],
+  "media": [
+    {
+      "type": "cover",
+      "url": "systems/gamma-world-7e/assets/media/cover.jpg"
+    }
+  ],
+  "initiative": "1d20",
+  "grid": {
+    "distance": 5,
+    "units": "ft"
+  },
+  "url": "https://github.com/spilth/gamma-world-7e"
+}
