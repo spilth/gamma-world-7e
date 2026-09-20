@@ -16,12 +16,7 @@
       "discord": "spilth"
     }
   ],
-  "media": [
-    {
-      "type": "cover",
-      "url": "systems/gamma-world-7e/assets/media/cover.jpg"
-    }
-  ],
+  "background": "systems/gamma-world-7e/assets/media/cover.webp",
   "initiative": "1d20",
   "grid": {
     "distance": 5,
