@@ -1,27 +1,27 @@
 <section class="character-sheet-body">
-    <img
-            class="token-img"
-            data-action="configurePrototypeToken"
-            src="{{actor.prototypeToken.texture.src}}"
-            alt="{{actor.name}}"
-    />
+  <img
+    class="token-img"
+    data-action="configurePrototypeToken"
+    src="{{actor.prototypeToken.texture.src}}"
+    alt="{{actor.name}}"
+  />
 
-    <div class="form-group">
-        <label>Name</label>
-        <input type="text" name="name" value="{{actor.name}}"/>
-    </div>
+  <div class="form-group">
+    <label>Name</label>
+    <input type="text" name="name" value="{{actor.name}}" />
+  </div>
 
-    <div class="form-group">
-        <label>Primary Origin</label>
-        <div class="origin-slot" data-origin-slot="primaryOrigin">
-            {{#if primaryOrigin}}{{primaryOrigin}}{{else}}Drop Origin Here{{/if}}
-        </div>
+  <div class="form-group">
+    <label>Primary Origin</label>
+    <div class="origin-slot" data-origin-slot="primaryOrigin">
+      {{#if primaryOrigin}}{{primaryOrigin}}{{else}}Drop Origin Here{{/if}}
     </div>
+  </div>
 
-    <div class="form-group">
-        <label>Secondary Origin</label>
-        <div class="origin-slot" data-origin-slot="secondaryOrigin">
-            {{#if secondaryOrigin}}{{secondaryOrigin}}{{else}}Drop Origin Here{{/if}}
-        </div>
+  <div class="form-group">
+    <label>Secondary Origin</label>
+    <div class="origin-slot" data-origin-slot="secondaryOrigin">
+      {{#if secondaryOrigin}}{{secondaryOrigin}}{{else}}Drop Origin Here{{/if}}
     </div>
+  </div>
 </section>
