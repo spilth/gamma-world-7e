@@ -12,8 +12,20 @@
   "documentTypes": {
     "Actor": {
       "character": {}
+    },
+    "Item": {
+      "origin": {}
     }
   },
+  "packs": [
+    {
+      "name": "origins",
+      "label": "Origins",
+      "system": "gamma-world-7e",
+      "path": "packs/origins",
+      "type": "Item"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
