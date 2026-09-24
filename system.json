@@ -8,6 +8,7 @@
     "verified": "14.368"
   },
   "esmodules": ["module/gamma-world-7e.mjs"],
+  "styles": ["styles/gamma-world-7e.css"],
   "documentTypes": {
     "Actor": {
       "character": {}
@@ -20,7 +21,6 @@
       "path": "lang/en.json"
     }
   ],
-
   "authors": [
     {
       "name": "Brian Kelly",
