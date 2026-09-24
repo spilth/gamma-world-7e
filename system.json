@@ -4,10 +4,23 @@
   "description": "D&D Gamma World - 7th Edition",
   "version": "0.0.1",
   "compatibility": {
-    "minimum": 14,
-    "maximum": 14,
+    "minimum": "14",
     "verified": "14.368"
   },
+  "esmodules": ["module/gamma-world-7e.mjs"],
+  "documentTypes": {
+    "Actor": {
+      "character": {}
+    }
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+
   "authors": [
     {
       "name": "Brian Kelly",
