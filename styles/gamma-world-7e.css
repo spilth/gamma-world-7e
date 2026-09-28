@@ -17,3 +17,19 @@
 .all-caps {
   text-transform: uppercase;
 }
+
+.abilities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.ability {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ability input {
+  text-align: center;
+}
