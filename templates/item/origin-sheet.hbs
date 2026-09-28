@@ -1,12 +1,13 @@
 <section class="origin-sheet-body">
   <h1>{{item.name}}</h1>
 
-  <h2>Summary</h2>
-  <p>{{item.system.summary}}</p>
+  <p class="all-caps">{{item.system.summary}}</p>
 
-  <h2>Description</h2>
-  <p>{{item.system.description}}</p>
+  {{#if item.system.description}}
+    <p>{{item.system.description}}</p>
+  {{/if}}
 
-  <h2>Appearance</h2>
+  <h3>Appearance</h3>
+
   <p>{{item.system.appearance}}</p>
 </section>

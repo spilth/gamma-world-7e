@@ -13,3 +13,7 @@
   height: 100%;
   overflow-y: auto;
 }
+
+.all-caps {
+  text-transform: uppercase;
+}
