@@ -63,7 +63,39 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     const slot = event.target.closest(".origin-slot")?.dataset.originSlot;
     if (!slot) return;
 
-    await this.actor.update({ [`system.${slot}`]: item.uuid });
+    const { primaryOrigin, secondaryOrigin } = {
+      ...this.actor.system,
+      [slot]: item.uuid,
+    };
+    await this.#setOrigins(primaryOrigin, secondaryOrigin);
+  }
+
+  // Page 59: 18 in the primary origin's ability and 16 in the secondary's,
+  // or 20 if both origins share the same ability. Roll 3d6 for the rest, in
+  // order. Until both origins are set, abilities reset to their defaults.
+  async #setOrigins(primaryOrigin, secondaryOrigin) {
+    const abilities =
+      this.actor.system.schema.fields.abilities.getInitialValue();
+
+    const primary = (await fromUuid(primaryOrigin))?.system.ability;
+    const secondary = (await fromUuid(secondaryOrigin))?.system.ability;
+    if (primary && secondary) {
+      for (const key of Object.keys(abilities)) {
+        if (key === primary) {
+          abilities[key] = primary === secondary ? 20 : 18;
+        } else if (key === secondary) {
+          abilities[key] = 16;
+        } else {
+          abilities[key] = (await new Roll("3d6").evaluate()).total;
+        }
+      }
+    }
+
+    await this.actor.update({
+      "system.primaryOrigin": primaryOrigin,
+      "system.secondaryOrigin": secondaryOrigin,
+      "system.abilities": abilities,
+    });
   }
 
   static async #onRollOrigins() {
@@ -89,10 +121,7 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     const index = await game.packs.get("gamma-world-7e.origins").getIndex();
     const uuidFor = (name) => index.find((entry) => entry.name === name)?.uuid;
 
-    await this.actor.update({
-      "system.primaryOrigin": uuidFor(primaryName),
-      "system.secondaryOrigin": uuidFor(secondaryName),
-    });
+    await this.#setOrigins(uuidFor(primaryName), uuidFor(secondaryName));
   }
 
   static async #onOpenOrigin(event, target) {

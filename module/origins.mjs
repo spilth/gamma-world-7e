@@ -2,6 +2,7 @@ export const Origins = [
   {
     name: "Android",
     system: {
+      ability: "int",
       summary: "You were made, not born.",
       description:
         "Simulation of a living creature is implicit in your shape, though sometimes you forget to boot up your “pretend to breathe” subroutine. But are you a living being who has machine parts, or a machine who has living parts?",
@@ -12,6 +13,7 @@ export const Origins = [
   {
     name: "Cockroach",
     system: {
+      ability: "con",
       summary: "You’re a mutated, sentient bug.",
       description:
         "You’re living proof that your kind can survive nuclear war. You collect stuff that smells good to you but that everyone else calls garbage. Some of that trash gives you valuable experience in salvaging Ancient machinery.",
@@ -22,6 +24,7 @@ export const Origins = [
   {
     name: "Doppelganger",
     system: {
+      ability: "int",
       summary:
         "You harness the shattered time lines to duplicate yourself in combat.",
       description:
@@ -33,6 +36,7 @@ export const Origins = [
   {
     name: "Electrokinetic",
     system: {
+      ability: "wis",
       summary:
         "You’re a living battery, capable of generating immense voltages of electricity.",
       description:
@@ -44,6 +48,7 @@ export const Origins = [
   {
     name: "Empath",
     system: {
+      ability: "cha",
       summary:
         "You manipulate emotions and life energy the way an artist uses paint.",
       description:
@@ -55,6 +60,7 @@ export const Origins = [
   {
     name: "Felinoid",
     system: {
+      ability: "dex",
       summary: "You are descended from the great cats of ancient times.",
       description: "",
       appearance:
@@ -64,6 +70,7 @@ export const Origins = [
   {
     name: "Giant",
     system: {
+      ability: "str",
       summary:
         "You’re freakishly big, like Andre the Giant big—we’re talking 7 or 8 feet tall and 400 to 500 pounds.",
       description:
@@ -75,6 +82,7 @@ export const Origins = [
   {
     name: "Gravity Controller",
     system: {
+      ability: "con",
       summary: "You direct one of the fundamental forces of the universe.",
       description:
         "You see the world as cascading waves of influence unified by the particles Professor Rat called gravitons. You gather and shape these gravitons into shields, weapons, and wonderful structures of attraction.",
@@ -85,6 +93,7 @@ export const Origins = [
   {
     name: "Hawkoid",
     system: {
+      ability: "wis",
       summary: "You are a mutated bird of prey.",
       description:
         "Your taloned feet have fully opposable “thumbs” and work as well as hands when you’re in the air. When you’re on the ground, you can handle objects using handlike claws at the wrist joints of your wings.",
@@ -95,6 +104,7 @@ export const Origins = [
   {
     name: "Hypercognitive",
     system: {
+      ability: "wis",
       summary: "You see the future before it happens.",
       description:
         "Your mind processes information at an incredible rate, glimpsing possible outcomes from adjacent realities. You mentally calculate the movement of enemies and the trajectories of weapons, and you never lose track of nearby foes. You also always know where the magician has hidden the rabbit.",
@@ -105,6 +115,7 @@ export const Origins = [
   {
     name: "Mind Breaker",
     system: {
+      ability: "cha",
       summary:
         "Seething anger coils inside your head like a snake, until you release it upon an enemy.",
       description:
@@ -116,6 +127,7 @@ export const Origins = [
   {
     name: "Mind Coercer",
     system: {
+      ability: "cha",
       summary: "You subtly manipulate the minds of others.",
       description:
         "With a little tug on their brain circuits, the mentally susceptible (which is pretty much everyone) become yours to control. You are very agreeable and polite, especially to your enemies. And why not? If you don’t like their decisions, you can change their minds for them.",
@@ -126,6 +138,7 @@ export const Origins = [
   {
     name: "Plant",
     system: {
+      ability: "con",
       summary: "You are a sentient, mobile plant.",
       description:
         "You are detached and rational. But you also possess curiosity and a desire to amass power, making you a natural explorer of Gamma Terra.",
@@ -136,6 +149,7 @@ export const Origins = [
   {
     name: "Pyrokinetic",
     system: {
+      ability: "wis",
       summary: "You like to start fires.",
       description:
         "Fire is your weapon, your armor, and when you shape tiny, temporary flame sculptures, your friend. Your next conflagration is never far from your thoughts, but you try to restrict your bonfires of vanity. Most people seem inclined to do what you ask, even before you threaten to burn down their town.",
@@ -146,6 +160,7 @@ export const Origins = [
   {
     name: "Radioactive",
     system: {
+      ability: "con",
       summary: "You channel the destructive forces that created Gamma Terra.",
       description:
         "You like to live dangerously. You figure if radiation can’t kill you, everything else should be survivable, too.",
@@ -156,6 +171,7 @@ export const Origins = [
   {
     name: "Rat Swarm",
     system: {
+      ability: "dex",
       summary:
         "You’re a consciousness distributed across a swarm of squeaking vermin.",
       description:
@@ -167,6 +183,7 @@ export const Origins = [
   {
     name: "Seismic",
     system: {
+      ability: "str",
       summary: "You’re a creature of earth and stone.",
       description:
         "You’re the strong-but-slow, bulky, gravelly voiced type who’s in touch with the land—literally. You can knock foes to the ground with a single stomp, or meld yourself with the ground to become nearly unmovable.",
@@ -177,6 +194,7 @@ export const Origins = [
   {
     name: "Speedster",
     system: {
+      ability: "dex",
       summary: "Everyone moves like molasses compared to you.",
       description:
         "You can race to the corner and back in the blink of an eye, move faster than a charging rifle hound, and read the Elysian Fusion Rifle Troubleshooting Guide in one sitting. You speak quickly and your mind constantly flits from one topic to the next. Your friends describe you as “fidgety.”",
@@ -187,6 +205,7 @@ export const Origins = [
   {
     name: "Telekinetic",
     system: {
+      ability: "int",
       summary:
         "You use the power of your mind to reshape the world around you.",
       description:
@@ -198,6 +217,7 @@ export const Origins = [
   {
     name: "Yeti",
     system: {
+      ability: "str",
       summary: "You are Bigfoot.",
       description:
         "You hate it when folks assume that you’re a savage beast—just because you have thick fur and big claws doesn’t mean you don’t have feelings.",
@@ -208,6 +228,7 @@ export const Origins = [
   {
     name: "Human, Engineered",
     system: {
+      ability: "int",
       summary:
         "Sure, you’re human. But you’re smarter, stronger, and tougher than any Ancient who ever drove to the corner store for a six-pack.",
       description:

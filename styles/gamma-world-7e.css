@@ -30,6 +30,17 @@
   align-items: center;
 }
 
+.ability-score {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
 .ability input {
+  width: 3rem;
   text-align: center;
+}
+
+.ability-modifier {
+  min-width: 2rem;
 }

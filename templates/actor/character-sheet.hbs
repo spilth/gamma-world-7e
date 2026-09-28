@@ -32,27 +32,45 @@
   <div class="abilities">
     <div class="ability">
       <label>Strength</label>
-      <input type="number" name="system.abilities.str" value="{{actor.system.abilities.str}}" />
+      <div class="ability-score">
+        <input type="number" name="system.abilities.str" value="{{actor.system.abilities.str}}" />
+        <span class="ability-modifier">{{numberFormat actor.system.abilityModifiers.str sign=true}}</span>
+      </div>
     </div>
     <div class="ability">
       <label>Constitution</label>
-      <input type="number" name="system.abilities.con" value="{{actor.system.abilities.con}}" />
+      <div class="ability-score">
+        <input type="number" name="system.abilities.con" value="{{actor.system.abilities.con}}" />
+        <span class="ability-modifier">{{numberFormat actor.system.abilityModifiers.con sign=true}}</span>
+      </div>
     </div>
     <div class="ability">
       <label>Dexterity</label>
-      <input type="number" name="system.abilities.dex" value="{{actor.system.abilities.dex}}" />
+      <div class="ability-score">
+        <input type="number" name="system.abilities.dex" value="{{actor.system.abilities.dex}}" />
+        <span class="ability-modifier">{{numberFormat actor.system.abilityModifiers.dex sign=true}}</span>
+      </div>
     </div>
     <div class="ability">
       <label>Intelligence</label>
-      <input type="number" name="system.abilities.int" value="{{actor.system.abilities.int}}" />
+      <div class="ability-score">
+        <input type="number" name="system.abilities.int" value="{{actor.system.abilities.int}}" />
+        <span class="ability-modifier">{{numberFormat actor.system.abilityModifiers.int sign=true}}</span>
+      </div>
     </div>
     <div class="ability">
       <label>Wisdom</label>
-      <input type="number" name="system.abilities.wis" value="{{actor.system.abilities.wis}}" />
+      <div class="ability-score">
+        <input type="number" name="system.abilities.wis" value="{{actor.system.abilities.wis}}" />
+        <span class="ability-modifier">{{numberFormat actor.system.abilityModifiers.wis sign=true}}</span>
+      </div>
     </div>
     <div class="ability">
       <label>Charisma</label>
-      <input type="number" name="system.abilities.cha" value="{{actor.system.abilities.cha}}" />
+      <div class="ability-score">
+        <input type="number" name="system.abilities.cha" value="{{actor.system.abilities.cha}}" />
+        <span class="ability-modifier">{{numberFormat actor.system.abilityModifiers.cha sign=true}}</span>
+      </div>
     </div>
   </div>
 </section>

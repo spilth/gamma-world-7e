@@ -16,4 +16,14 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
       }),
     };
   }
+
+  // Page 59: each ability modifier is half the score minus 10, rounded down.
+  prepareDerivedData() {
+    this.abilityModifiers = Object.fromEntries(
+      Object.entries(this.abilities).map(([key, score]) => [
+        key,
+        Math.floor((score - 10) / 2),
+      ]),
+    );
+  }
 }

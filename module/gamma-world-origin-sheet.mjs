@@ -1,3 +1,5 @@
+import { Abilities } from "./abilities.mjs";
+
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
 
@@ -20,6 +22,7 @@ export class GammaWorldOriginSheet extends HandlebarsApplicationMixin(
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
     context.item = this.item;
+    context.ability = Abilities[this.item.system.ability];
     return context;
   }
 }
