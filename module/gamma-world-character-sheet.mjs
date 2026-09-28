@@ -1,4 +1,6 @@
-const { HandlebarsApplicationMixin } = foundry.applications.api;
+import { Origins } from "./origins.mjs";
+
+const { DialogV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
 
 export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
@@ -9,6 +11,9 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     position: { width: 400, height: 400 },
     window: { resizable: true },
     form: { submitOnChange: true },
+    actions: {
+      rollOrigins: GammaWorldCharacterSheet.#onRollOrigins,
+    },
   };
 
   static PARTS = {
@@ -58,5 +63,34 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     if (!slot) return;
 
     await this.actor.update({ [`system.${slot}`]: item.uuid });
+  }
+
+  static async #onRollOrigins() {
+    const { primaryOrigin, secondaryOrigin } = this.actor.system;
+    if (primaryOrigin || secondaryOrigin) {
+      const confirmed = await DialogV2.confirm({
+        window: { title: "Roll Origins" },
+        content: "<p>This will replace your current Origins. Are you sure?</p>",
+      });
+      if (!confirmed) return;
+    }
+
+    // The Character Origin Table maps 1-20 to the first 20 Origins in order.
+    // If the second roll matches the first, the secondary is Engineered Human.
+    const primaryRoll = (await new Roll("1d20").evaluate()).total;
+    const secondaryRoll = (await new Roll("1d20").evaluate()).total;
+    const primaryName = Origins[primaryRoll - 1].name;
+    const secondaryName =
+      secondaryRoll === primaryRoll
+        ? "Human, Engineered"
+        : Origins[secondaryRoll - 1].name;
+
+    const index = await game.packs.get("gamma-world-7e.origins").getIndex();
+    const uuidFor = (name) => index.find((entry) => entry.name === name)?.uuid;
+
+    await this.actor.update({
+      "system.primaryOrigin": uuidFor(primaryName),
+      "system.secondaryOrigin": uuidFor(secondaryName),
+    });
   }
 }
