@@ -13,6 +13,7 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     form: { submitOnChange: true },
     actions: {
       rollOrigins: GammaWorldCharacterSheet.#onRollOrigins,
+      openOrigin: GammaWorldCharacterSheet.#onOpenOrigin,
     },
   };
 
@@ -92,5 +93,14 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
       "system.primaryOrigin": uuidFor(primaryName),
       "system.secondaryOrigin": uuidFor(secondaryName),
     });
+  }
+
+  static async #onOpenOrigin(event, target) {
+    const slot = target.closest(".origin-slot")?.dataset.originSlot;
+    const uuid = slot && this.actor.system[slot];
+    if (!uuid) return;
+
+    const origin = await fromUuid(uuid);
+    origin?.sheet.render(true);
   }
 }
