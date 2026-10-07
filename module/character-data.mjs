@@ -1,3 +1,5 @@
+import { Skills } from "./skills.mjs";
+
 export class CharacterData extends foundry.abstract.TypeDataModel {
   static defineSchema() {
     const { NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -14,6 +16,14 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
         wis: abilityField(),
         cha: abilityField(),
       }),
+      skillBonuses: new SchemaField(
+        Object.fromEntries(
+          Object.keys(Skills).map((key) => [
+            key,
+            new NumberField({ required: true, integer: true, initial: 0 }),
+          ]),
+        ),
+      ),
     };
   }
 
@@ -23,6 +33,14 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
       Object.entries(this.abilities).map(([key, score]) => [
         key,
         Math.floor((score - 10) / 2),
+      ]),
+    );
+
+    // Page 60: a skill uses its key ability's modifier plus any bonuses.
+    this.skills = Object.fromEntries(
+      Object.entries(Skills).map(([key, { ability }]) => [
+        key,
+        this.abilityModifiers[ability] + this.skillBonuses[key],
       ]),
     );
   }

@@ -73,4 +73,15 @@
       </div>
     </div>
   </div>
+
+  <h3>Skills</h3>
+
+  <ul class="skills">
+    {{#each skills}}
+      <li class="skill">
+        <span class="skill-name">{{label}} ({{ability}})</span>
+        <span class="skill-total">{{numberFormat total sign=true}}</span>
+      </li>
+    {{/each}}
+  </ul>
 </section>

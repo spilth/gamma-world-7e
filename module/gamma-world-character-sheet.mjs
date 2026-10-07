@@ -1,4 +1,6 @@
+import { Abilities } from "./abilities.mjs";
 import { Origins } from "./origins.mjs";
+import { Skills } from "./skills.mjs";
 
 const { DialogV2, HandlebarsApplicationMixin } = foundry.applications.api;
 const { ActorSheetV2 } = foundry.applications.sheets;
@@ -49,6 +51,12 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
       ? (await fromUuid(this.actor.system.secondaryOrigin))?.name
       : null;
 
+    context.skills = Object.entries(Skills).map(([key, skill]) => ({
+      label: skill.label,
+      ability: Abilities[skill.ability].slice(0, 3),
+      total: this.actor.system.skills[key],
+    }));
+
     return context;
   }
 
@@ -72,13 +80,17 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
 
   // Page 59: 18 in the primary origin's ability and 16 in the secondary's,
   // or 20 if both origins share the same ability. Roll 3d6 for the rest, in
-  // order. Until both origins are set, abilities reset to their defaults.
+  // order. Page 60: +4 to each origin's skills, plus +4 to a skill rolled on
+  // a d10. Until both origins are set, abilities and skills reset to defaults.
   async #setOrigins(primaryOrigin, secondaryOrigin) {
-    const abilities =
-      this.actor.system.schema.fields.abilities.getInitialValue();
+    const { fields } = this.actor.system.schema;
+    const abilities = fields.abilities.getInitialValue();
+    const skillBonuses = fields.skillBonuses.getInitialValue();
 
-    const primary = (await fromUuid(primaryOrigin))?.system.ability;
-    const secondary = (await fromUuid(secondaryOrigin))?.system.ability;
+    const primaryData = (await fromUuid(primaryOrigin))?.system;
+    const secondaryData = (await fromUuid(secondaryOrigin))?.system;
+    const primary = primaryData?.ability;
+    const secondary = secondaryData?.ability;
     if (primary && secondary) {
       for (const key of Object.keys(abilities)) {
         if (key === primary) {
@@ -89,12 +101,19 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
           abilities[key] = (await new Roll("3d6").evaluate()).total;
         }
       }
+
+      for (const key of [...primaryData.skills, ...secondaryData.skills]) {
+        skillBonuses[key] += 4;
+      }
+      const skillRoll = (await new Roll("1d10").evaluate()).total;
+      skillBonuses[Object.keys(Skills)[skillRoll - 1]] += 4;
     }
 
     await this.actor.update({
       "system.primaryOrigin": primaryOrigin,
       "system.secondaryOrigin": secondaryOrigin,
       "system.abilities": abilities,
+      "system.skillBonuses": skillBonuses,
     });
   }
 

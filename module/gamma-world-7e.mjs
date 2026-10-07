@@ -36,21 +36,49 @@ Hooks.once("init", () => {
 Hooks.once("ready", async () => {
   if (!game.user.isGM) return;
 
+  // Keep the Origins compendium in sync with origins.mjs, matching by name so
+  // existing entries keep their IDs and Characters' links to them survive.
   const pack = game.packs.get("gamma-world-7e.origins");
-  const index = await pack.getIndex();
+  const existing = await pack.getDocuments();
+  const byName = new Map(existing.map((doc) => [doc.name, doc]));
 
-  if (index.size > 0) return;
+  const toCreate = [];
+  const toUpdate = [];
+  for (const origin of Origins) {
+    const doc = byName.get(origin.name);
+    if (!doc) {
+      toCreate.push({
+        name: origin.name,
+        type: "origin",
+        system: origin.system,
+      });
+      continue;
+    }
+    const changed = Object.entries(origin.system).some(
+      ([key, value]) =>
+        JSON.stringify(doc.system[key]) !== JSON.stringify(value),
+    );
+    if (changed) toUpdate.push({ _id: doc.id, system: origin.system });
+  }
 
+  const names = new Set(Origins.map((origin) => origin.name));
+  const toDelete = existing
+    .filter((doc) => !names.has(doc.name))
+    .map((doc) => doc.id);
+
+  if (!toCreate.length && !toUpdate.length && !toDelete.length) return;
+
+  const { locked } = pack;
   await pack.configure({ locked: false });
 
-  const items = Origins.map((origin) => ({
-    name: origin.name,
-    type: "origin",
-    system: origin.system,
-  }));
+  const options = { pack: pack.collection };
+  await Item.createDocuments(toCreate, options);
+  await Item.updateDocuments(toUpdate, options);
+  await Item.deleteDocuments(toDelete, options);
+  console.log(
+    `Gamma World 7E | Synced Origins: ${toCreate.length} created, ` +
+      `${toUpdate.length} updated, ${toDelete.length} deleted`,
+  );
 
-  await Item.createDocuments(items, { pack: "gamma-world-7e.origins" });
-  console.log(`Gamma World 7E | Seeded ${items.length} Origins`);
-
-  await pack.configure({ locked: true });
+  await pack.configure({ locked });
 });

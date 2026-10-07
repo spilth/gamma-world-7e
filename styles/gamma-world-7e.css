@@ -44,3 +44,13 @@
 .ability-modifier {
   min-width: 2rem;
 }
+
+.skills {
+  list-style: none;
+  padding: 0;
+}
+
+.skill {
+  display: flex;
+  justify-content: space-between;
+}

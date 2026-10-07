@@ -1,4 +1,5 @@
 import { Abilities } from "./abilities.mjs";
+import { Skills } from "./skills.mjs";
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 const { ItemSheetV2 } = foundry.applications.sheets;
@@ -23,6 +24,9 @@ export class GammaWorldOriginSheet extends HandlebarsApplicationMixin(
     const context = await super._prepareContext(options);
     context.item = this.item;
     context.ability = Abilities[this.item.system.ability];
+    context.skills = this.item.system.skills
+      .map((key) => `${Skills[key].label} checks`)
+      .join(" and ");
     return context;
   }
 }
