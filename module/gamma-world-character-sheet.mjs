@@ -51,11 +51,13 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
       ? (await fromUuid(this.actor.system.secondaryOrigin))?.name
       : null;
 
-    context.skills = Object.entries(Skills).map(([key, skill]) => ({
-      label: skill.label,
-      ability: Abilities[skill.ability].slice(0, 3),
-      total: this.actor.system.skills[key],
-    }));
+    context.skills = Object.entries(this.actor.system.skills).map(
+      ([key, skill]) => ({
+        ...skill,
+        label: Skills[key].label,
+        ability: Abilities[skill.ability].slice(0, 3),
+      }),
+    );
 
     return context;
   }
@@ -85,7 +87,8 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
   async #setOrigins(primaryOrigin, secondaryOrigin) {
     const { fields } = this.actor.system.schema;
     const abilities = fields.abilities.getInitialValue();
-    const skillBonuses = fields.skillBonuses.getInitialValue();
+    const originSkillBonuses = fields.originSkillBonuses.getInitialValue();
+    let level1Skill = "";
 
     const primaryData = (await fromUuid(primaryOrigin))?.system;
     const secondaryData = (await fromUuid(secondaryOrigin))?.system;
@@ -103,17 +106,18 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
       }
 
       for (const key of [...primaryData.skills, ...secondaryData.skills]) {
-        skillBonuses[key] += 4;
+        originSkillBonuses[key] += 4;
       }
       const skillRoll = (await new Roll("1d10").evaluate()).total;
-      skillBonuses[Object.keys(Skills)[skillRoll - 1]] += 4;
+      level1Skill = Object.keys(Skills)[skillRoll - 1];
     }
 
     await this.actor.update({
       "system.primaryOrigin": primaryOrigin,
       "system.secondaryOrigin": secondaryOrigin,
       "system.abilities": abilities,
-      "system.skillBonuses": skillBonuses,
+      "system.originSkillBonuses": originSkillBonuses,
+      "system.level1Skill": level1Skill,
     });
   }
 

@@ -6,6 +6,12 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
     const abilityField = () =>
       new NumberField({ required: true, integer: true, min: 0, initial: 10 });
     return {
+      level: new NumberField({
+        required: true,
+        integer: true,
+        min: 1,
+        initial: 1,
+      }),
       primaryOrigin: new StringField({ required: false, blank: true }),
       secondaryOrigin: new StringField({ required: false, blank: true }),
       abilities: new SchemaField({
@@ -16,7 +22,7 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
         wis: abilityField(),
         cha: abilityField(),
       }),
-      skillBonuses: new SchemaField(
+      originSkillBonuses: new SchemaField(
         Object.fromEntries(
           Object.keys(Skills).map((key) => [
             key,
@@ -24,6 +30,11 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
           ]),
         ),
       ),
+      level1Skill: new StringField({
+        required: false,
+        blank: true,
+        choices: Object.keys(Skills),
+      }),
     };
   }
 
@@ -36,12 +47,26 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
       ]),
     );
 
-    // Page 60: a skill uses its key ability's modifier plus any bonuses.
+    // Page 60: a skill adds your level, its key ability's modifier, and any
+    // bonuses.
     this.skills = Object.fromEntries(
-      Object.entries(Skills).map(([key, { ability }]) => [
-        key,
-        this.abilityModifiers[ability] + this.skillBonuses[key],
-      ]),
+      Object.entries(Skills).map(([key, { ability }]) => {
+        const abilityBonus = this.abilityModifiers[ability];
+        const originBonus = this.originSkillBonuses[key];
+        const level1Bonus = this.level1Skill === key ? 4 : 0;
+        const levelBonus = this.level;
+        return [
+          key,
+          {
+            ability,
+            abilityBonus,
+            originBonus,
+            level1Bonus,
+            levelBonus,
+            total: abilityBonus + originBonus + level1Bonus + levelBonus,
+          },
+        ];
+      }),
     );
   }
 }

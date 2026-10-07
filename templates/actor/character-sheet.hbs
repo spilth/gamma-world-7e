@@ -12,6 +12,11 @@
   </div>
 
   <div class="form-group">
+    <label>Level</label>
+    <input type="number" name="system.level" value="{{actor.system.level}}" />
+  </div>
+
+  <div class="form-group">
     <label>Primary Origin</label>
     <div class="origin-slot" data-origin-slot="primaryOrigin">
       {{#if primaryOrigin}}<a data-action="openOrigin">{{primaryOrigin}}</a>{{else}}Drop Origin Here{{/if}}
@@ -76,12 +81,30 @@
 
   <h3>Skills</h3>
 
-  <ul class="skills">
-    {{#each skills}}
-      <li class="skill">
-        <span class="skill-name">{{label}} ({{ability}})</span>
-        <span class="skill-total">{{numberFormat total sign=true}}</span>
-      </li>
-    {{/each}}
-  </ul>
+  <table class="skills">
+    <thead>
+      <tr>
+        <th>Skill</th>
+        <th>Key Ability</th>
+        <th>Ability Bonus</th>
+        <th>Origin Bonus</th>
+        <th>Level 1 Bonus</th>
+        <th>Level Bonus</th>
+        <th>Overall Bonus</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each skills}}
+        <tr>
+          <td>{{label}}</td>
+          <td>{{ability}}</td>
+          <td>{{#if abilityBonus}}{{numberFormat abilityBonus sign=true}}{{/if}}</td>
+          <td>{{#if originBonus}}{{numberFormat originBonus sign=true}}{{/if}}</td>
+          <td>{{#if level1Bonus}}{{numberFormat level1Bonus sign=true}}{{/if}}</td>
+          <td>{{#if levelBonus}}{{numberFormat levelBonus sign=true}}{{/if}}</td>
+          <td><strong>{{numberFormat total sign=true}}</strong></td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </section>

@@ -45,12 +45,12 @@
   min-width: 2rem;
 }
 
-.skills {
-  list-style: none;
-  padding: 0;
+.skills th,
+.skills td {
+  text-align: center;
 }
 
-.skill {
-  display: flex;
-  justify-content: space-between;
+.skills th:first-child,
+.skills td:first-child {
+  text-align: left;
 }
