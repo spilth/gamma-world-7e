@@ -1,38 +1,50 @@
 <section class="character-sheet-body">
-  <img
-    class="token-img"
-    data-action="configurePrototypeToken"
-    src="{{actor.prototypeToken.texture.src}}"
-    alt="{{actor.name}}"
-  />
+  <div class="character-header">
+    <img
+      class="token-img"
+      data-action="configurePrototypeToken"
+      src="{{actor.prototypeToken.texture.src}}"
+      alt="{{actor.name}}"
+    />
 
-  <div class="form-group">
-    <label>Name</label>
-    <input type="text" name="name" value="{{actor.name}}" />
-  </div>
+    <div class="character-details">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" value="{{actor.name}}" />
+      </div>
 
-  <div class="form-group">
-    <label>Level</label>
-    <input type="number" name="system.level" value="{{actor.system.level}}" />
-  </div>
+      <div class="form-group">
+        <label>Level</label>
+        <input type="number" name="system.level" value="{{actor.system.level}}" />
+      </div>
 
-  <div class="form-group">
-    <label>Primary Origin</label>
-    <div class="origin-slot" data-origin-slot="primaryOrigin">
-      {{#if primaryOrigin}}<a data-action="openOrigin">{{primaryOrigin}}</a>{{else}}Drop Origin Here{{/if}}
+      <div class="origins">
+        <input
+          type="text"
+          class="origin-slot"
+          data-origin-slot="primaryOrigin"
+          data-action="openOrigin"
+          {{#if primaryOrigin}}data-tooltip="{{primaryOrigin.system.summary}}"{{/if}}
+          value="{{primaryOrigin.name}}"
+          placeholder="Primary Origin"
+          readonly
+        />
+        <input
+          type="text"
+          class="origin-slot"
+          data-origin-slot="secondaryOrigin"
+          data-action="openOrigin"
+          {{#if secondaryOrigin}}data-tooltip="{{secondaryOrigin.system.summary}}"{{/if}}
+          value="{{secondaryOrigin.name}}"
+          placeholder="Secondary Origin"
+          readonly
+        />
+        <button type="button" data-action="rollOrigins" data-tooltip="Roll Origins">
+          <i class="fa-solid fa-dice-d20"></i>
+        </button>
+      </div>
     </div>
   </div>
-
-  <div class="form-group">
-    <label>Secondary Origin</label>
-    <div class="origin-slot" data-origin-slot="secondaryOrigin">
-      {{#if secondaryOrigin}}<a data-action="openOrigin">{{secondaryOrigin}}</a>{{else}}Drop Origin Here{{/if}}
-    </div>
-  </div>
-
-  <button type="button" data-action="rollOrigins" data-tooltip="Roll Origins">
-    <i class="fa-solid fa-dice-d20"></i>
-  </button>
 
   <div class="abilities">
     <div class="ability">

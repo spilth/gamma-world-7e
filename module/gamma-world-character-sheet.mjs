@@ -10,7 +10,7 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["gamma-world-7e", "sheet", "actor"],
-    position: { width: 400, height: 400 },
+    position: { width: 600, height: 860 },
     window: { resizable: true },
     form: { submitOnChange: true },
     actions: {
@@ -44,11 +44,11 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     context.actor = this.actor;
 
     context.primaryOrigin = this.actor.system.primaryOrigin
-      ? (await fromUuid(this.actor.system.primaryOrigin))?.name
+      ? await fromUuid(this.actor.system.primaryOrigin)
       : null;
 
     context.secondaryOrigin = this.actor.system.secondaryOrigin
-      ? (await fromUuid(this.actor.system.secondaryOrigin))?.name
+      ? await fromUuid(this.actor.system.secondaryOrigin)
       : null;
 
     context.skills = Object.entries(this.actor.system.skills).map(
