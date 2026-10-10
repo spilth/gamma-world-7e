@@ -11,13 +11,14 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["gamma-world-7e", "sheet", "actor"],
-    position: { width: 600, height: 800 },
+    position: { width: 600, height: 720 },
     window: { resizable: true },
     form: { submitOnChange: true },
     actions: {
       rollOrigins: GammaWorldCharacterSheet.#onRollOrigins,
       openOrigin: GammaWorldCharacterSheet.#onOpenOrigin,
       rollAbility: GammaWorldCharacterSheet.#onRollAbility,
+      rollSkill: GammaWorldCharacterSheet.#onRollSkill,
     },
   };
 
@@ -61,6 +62,7 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     context.skills = Object.entries(this.actor.system.skills).map(
       ([key, skill]) => ({
         ...skill,
+        key,
         label: Skills[key].label,
         ability: Abilities[skill.ability].slice(0, 3),
       }),
@@ -163,19 +165,34 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     origin?.sheet.render(true);
   }
 
-  // An ability check is a d20 plus the ability's modifier, with an optional
-  // situation modifier from -8 to +8.
+  // An ability check is a d20 plus the ability's modifier.
   static async #onRollAbility(event, target) {
     const { ability } = target.dataset;
-    const label = Abilities[ability];
-    const modifier = this.actor.system.abilityModifiers[ability];
+    await this.#rollCheck(
+      Abilities[ability],
+      this.actor.system.abilityModifiers[ability],
+    );
+  }
 
+  // A skill check is a d20 plus the skill's overall bonus.
+  static async #onRollSkill(event, target) {
+    const { skill } = target.dataset;
+    await this.#rollCheck(
+      Skills[skill].label,
+      this.actor.system.skills[skill].total,
+    );
+  }
+
+  // Ask for a situation modifier from -8 to +8, then roll a d20 plus the
+  // modifier and post it to chat.
+  async #rollCheck(label, modifier) {
     const situation = await DialogV2.prompt({
+      classes: ["gamma-world-7e", "check-dialog"],
       window: { title: `${label} Check` },
       content: `
         <div class="form-group">
           <label>${label} Modifier</label>
-          <span>${modifier.signedString()}</span>
+          <span>${modifier < 0 ? modifier : `+${modifier}`}</span>
         </div>
         <div class="form-group">
           <label>Situation Modifier</label>

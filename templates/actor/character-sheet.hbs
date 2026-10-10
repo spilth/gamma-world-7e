@@ -95,26 +95,24 @@
     </div>
   </div>
 
-  <h3>Skills</h3>
-
   <table class="skills">
     <thead>
       <tr>
         <th>Skill</th>
-        <th>Key Ability</th>
-        <th>Ability Bonus</th>
-        <th>Origin Bonus</th>
-        <th>Level 1 Bonus</th>
-        <th>Level Bonus</th>
-        <th>Overall Bonus</th>
+        <th>Ability</th>
+        <th>Modifier</th>
+        <th>Origin</th>
+        <th>Level 1</th>
+        <th>Level</th>
+        <th>Total</th>
       </tr>
     </thead>
     <tbody>
       {{#each skills}}
         <tr>
-          <td>{{label}}</td>
+          <td class="rollable" data-action="rollSkill" data-skill="{{key}}">{{label}}</td>
           <td>{{ability}}</td>
-          <td>{{#if abilityBonus}}{{numberFormat abilityBonus sign=true}}{{/if}}</td>
+          <td>{{numberFormat abilityBonus sign=true}}</td>
           <td>{{#if originBonus}}{{numberFormat originBonus sign=true}}{{/if}}</td>
           <td>{{#if level1Bonus}}{{numberFormat level1Bonus sign=true}}{{/if}}</td>
           <td>{{#if levelBonus}}{{numberFormat levelBonus sign=true}}{{/if}}</td>

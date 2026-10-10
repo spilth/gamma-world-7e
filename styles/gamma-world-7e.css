@@ -94,3 +94,7 @@
 .skills td:first-child {
   text-align: left;
 }
+
+.check-dialog .form-group label {
+  white-space: nowrap;
+}
