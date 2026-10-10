@@ -3,6 +3,7 @@ export const Origins = [
     name: "Android",
     system: {
       ability: "int",
+      powerSource: "dark",
       skills: ["science"],
       summary: "You were made, not born.",
       description:
@@ -15,6 +16,7 @@ export const Origins = [
     name: "Cockroach",
     system: {
       ability: "con",
+      powerSource: "bio",
       skills: ["mechanics"],
       summary: "You’re a mutated, sentient bug.",
       description:
@@ -27,6 +29,7 @@ export const Origins = [
     name: "Doppelganger",
     system: {
       ability: "int",
+      powerSource: "dark",
       skills: ["conspiracy"],
       summary:
         "You harness the shattered time lines to duplicate yourself in combat.",
@@ -40,6 +43,7 @@ export const Origins = [
     name: "Electrokinetic",
     system: {
       ability: "wis",
+      powerSource: "dark",
       skills: ["mechanics"],
       summary:
         "You’re a living battery, capable of generating immense voltages of electricity.",
@@ -53,6 +57,7 @@ export const Origins = [
     name: "Empath",
     system: {
       ability: "cha",
+      powerSource: "psi",
       skills: ["insight"],
       summary:
         "You manipulate emotions and life energy the way an artist uses paint.",
@@ -66,6 +71,7 @@ export const Origins = [
     name: "Felinoid",
     system: {
       ability: "dex",
+      powerSource: "bio",
       skills: ["stealth"],
       summary: "You are descended from the great cats of ancient times.",
       description: "",
@@ -77,6 +83,7 @@ export const Origins = [
     name: "Giant",
     system: {
       ability: "str",
+      powerSource: "bio",
       skills: ["athletics"],
       summary:
         "You’re freakishly big, like Andre the Giant big—we’re talking 7 or 8 feet tall and 400 to 500 pounds.",
@@ -90,6 +97,7 @@ export const Origins = [
     name: "Gravity Controller",
     system: {
       ability: "con",
+      powerSource: "dark",
       skills: ["athletics"],
       summary: "You direct one of the fundamental forces of the universe.",
       description:
@@ -102,6 +110,7 @@ export const Origins = [
     name: "Hawkoid",
     system: {
       ability: "wis",
+      powerSource: "bio",
       skills: ["perception"],
       summary: "You are a mutated bird of prey.",
       description:
@@ -114,6 +123,7 @@ export const Origins = [
     name: "Hypercognitive",
     system: {
       ability: "wis",
+      powerSource: "psi",
       skills: ["insight"],
       summary: "You see the future before it happens.",
       description:
@@ -126,6 +136,7 @@ export const Origins = [
     name: "Mind Breaker",
     system: {
       ability: "cha",
+      powerSource: "psi",
       skills: ["interaction"],
       summary:
         "Seething anger coils inside your head like a snake, until you release it upon an enemy.",
@@ -139,6 +150,7 @@ export const Origins = [
     name: "Mind Coercer",
     system: {
       ability: "cha",
+      powerSource: "psi",
       skills: ["interaction"],
       summary: "You subtly manipulate the minds of others.",
       description:
@@ -151,6 +163,7 @@ export const Origins = [
     name: "Plant",
     system: {
       ability: "con",
+      powerSource: "bio",
       skills: ["nature"],
       summary: "You are a sentient, mobile plant.",
       description:
@@ -163,6 +176,7 @@ export const Origins = [
     name: "Pyrokinetic",
     system: {
       ability: "wis",
+      powerSource: "psi",
       skills: ["interaction"],
       summary: "You like to start fires.",
       description:
@@ -175,6 +189,7 @@ export const Origins = [
     name: "Radioactive",
     system: {
       ability: "con",
+      powerSource: "dark",
       skills: ["science"],
       summary: "You channel the destructive forces that created Gamma Terra.",
       description:
@@ -187,6 +202,7 @@ export const Origins = [
     name: "Rat Swarm",
     system: {
       ability: "dex",
+      powerSource: "bio",
       skills: ["stealth"],
       summary:
         "You’re a consciousness distributed across a swarm of squeaking vermin.",
@@ -200,6 +216,7 @@ export const Origins = [
     name: "Seismic",
     system: {
       ability: "str",
+      powerSource: "dark",
       skills: ["athletics"],
       summary: "You’re a creature of earth and stone.",
       description:
@@ -212,6 +229,7 @@ export const Origins = [
     name: "Speedster",
     system: {
       ability: "dex",
+      powerSource: "psi",
       skills: ["acrobatics"],
       summary: "Everyone moves like molasses compared to you.",
       description:
@@ -224,6 +242,7 @@ export const Origins = [
     name: "Telekinetic",
     system: {
       ability: "int",
+      powerSource: "psi",
       skills: ["mechanics"],
       summary:
         "You use the power of your mind to reshape the world around you.",
@@ -237,6 +256,7 @@ export const Origins = [
     name: "Yeti",
     system: {
       ability: "str",
+      powerSource: "bio",
       skills: ["nature"],
       summary: "You are Bigfoot.",
       description:
@@ -249,6 +269,7 @@ export const Origins = [
     name: "Human, Engineered",
     system: {
       ability: "int",
+      powerSource: "",
       skills: ["interaction", "science"],
       summary:
         "Sure, you’re human. But you’re smarter, stronger, and tougher than any Ancient who ever drove to the corner store for a six-pack.",

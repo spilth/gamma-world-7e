@@ -1,5 +1,6 @@
 import { Abilities } from "./abilities.mjs";
 import { Origins } from "./origins.mjs";
+import { PowerSources } from "./power-sources.mjs";
 import { Skills } from "./skills.mjs";
 
 const { DialogV2, HandlebarsApplicationMixin } = foundry.applications.api;
@@ -10,7 +11,7 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
 ) {
   static DEFAULT_OPTIONS = {
     classes: ["gamma-world-7e", "sheet", "actor"],
-    position: { width: 600, height: 860 },
+    position: { width: 600, height: 800 },
     window: { resizable: true },
     form: { submitOnChange: true },
     actions: {
@@ -51,6 +52,11 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     context.secondaryOrigin = this.actor.system.secondaryOrigin
       ? await fromUuid(this.actor.system.secondaryOrigin)
       : null;
+
+    // Engineered Humans have no power source.
+    context.powerSource = context.primaryOrigin
+      ? (PowerSources[context.primaryOrigin.system.powerSource] ?? "None")
+      : "";
 
     context.skills = Object.entries(this.actor.system.skills).map(
       ([key, skill]) => ({
