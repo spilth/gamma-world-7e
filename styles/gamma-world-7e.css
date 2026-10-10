@@ -62,6 +62,14 @@
   gap: 0.25rem;
 }
 
+.rollable {
+  cursor: pointer;
+}
+
+.rollable:hover {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+
 .ability-score {
   display: flex;
   align-items: center;

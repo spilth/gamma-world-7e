@@ -16,6 +16,7 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
     actions: {
       rollOrigins: GammaWorldCharacterSheet.#onRollOrigins,
       openOrigin: GammaWorldCharacterSheet.#onOpenOrigin,
+      rollAbility: GammaWorldCharacterSheet.#onRollAbility,
     },
   };
 
@@ -154,5 +155,49 @@ export class GammaWorldCharacterSheet extends HandlebarsApplicationMixin(
 
     const origin = await fromUuid(uuid);
     origin?.sheet.render(true);
+  }
+
+  // An ability check is a d20 plus the ability's modifier, with an optional
+  // situation modifier from -8 to +8.
+  static async #onRollAbility(event, target) {
+    const { ability } = target.dataset;
+    const label = Abilities[ability];
+    const modifier = this.actor.system.abilityModifiers[ability];
+
+    const situation = await DialogV2.prompt({
+      window: { title: `${label} Check` },
+      content: `
+        <div class="form-group">
+          <label>${label} Modifier</label>
+          <span>${modifier.signedString()}</span>
+        </div>
+        <div class="form-group">
+          <label>Situation Modifier</label>
+          <input type="number" name="situation" min="-8" max="8" step="1" placeholder="0" autofocus />
+        </div>`,
+      ok: {
+        label: "Roll",
+        icon: "fa-solid fa-dice-d20",
+        callback: (event, button) =>
+          Math.clamp(
+            Math.trunc(button.form.elements.situation.valueAsNumber || 0),
+            -8,
+            8,
+          ),
+      },
+      rejectClose: false,
+    });
+    if (situation === null) return;
+
+    // Write signs directly so negatives read "1d20 - 1" rather than "+ -1".
+    const modifiers = [modifier, situation]
+      .filter((value) => value)
+      .map((value) => (value < 0 ? `- ${-value}` : `+ ${value}`));
+    const roll = await new Roll(["1d20", ...modifiers].join(" ")).evaluate();
+
+    await roll.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      flavor: `${label} Check`,
+    });
   }
 }
