@@ -4,7 +4,8 @@
       "character": "Character"
     },
     "Item": {
-      "origin": "Origin"
+      "origin": "Origin",
+      "power": "Power"
     }
   }
 }

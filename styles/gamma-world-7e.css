@@ -98,3 +98,21 @@
 .check-dialog .form-group label {
   white-space: nowrap;
 }
+
+.power-sheet-body {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Power colors from the book: Novice (at-will) is green, Utility and Expert
+   (encounter) are purple. */
+.power-novice {
+  background-color: #304d0c;
+  color: white;
+}
+
+.power-utility,
+.power-expert {
+  background-color: #3d1e53;
+  color: white;
+}

@@ -14,7 +14,8 @@
       "character": {}
     },
     "Item": {
-      "origin": {}
+      "origin": {},
+      "power": {}
     }
   },
   "packs": [
@@ -23,6 +24,13 @@
       "label": "Origins",
       "system": "gamma-world-7e",
       "path": "packs/origins",
+      "type": "Item"
+    },
+    {
+      "name": "powers",
+      "label": "Powers",
+      "system": "gamma-world-7e",
+      "path": "packs/powers",
       "type": "Item"
     }
   ],
